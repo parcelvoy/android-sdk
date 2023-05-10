@@ -1,0 +1,3 @@
+include ':core'
+include ':samples:kotlin-android-app'
+rootProject.name = "Parcelvoy-Android"

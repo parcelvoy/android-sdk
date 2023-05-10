@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "697087175041",
+    "project_id": "caramel-caster-367919",
+    "storage_bucket": "caramel-caster-367919.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:697087175041:android:265db286aa4c9fddace080",
+        "android_client_info": {
+          "package_name": "com.parcelvoy.example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "697087175041-nogsl2knu94u3ipsu1ho1mq7dcfac4jo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgKrUQ-cr8i5tR4OUaZQWuZ57ReOgocjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "697087175041-nogsl2knu94u3ipsu1ho1mq7dcfac4jo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

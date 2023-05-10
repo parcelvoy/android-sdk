@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Parcelvoy</string>
+    <string name="register_notifications_button_text">Register Notifications</string>
+</resources>
