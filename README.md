@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/parcelvoy/android-sdk.svg)](https://jitpack.io/#parcelvoy/android-sdk)
+
 <p align="center">
   <img width="400" alt="Parcelvoy Logo" src=".github/assets/logo-light.png#gh-light-mode-only" />
   <img width="400" alt="Parcelvoy Logo" src=".github/assets/logo-dark.png#gh-dark-mode-only" />
