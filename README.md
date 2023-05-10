@@ -15,7 +15,7 @@ Installing the Parcelvoy Android SDK will provide you with user identification, 
 Go to File -> Swift Packages -> Add Package Dependency and enter:
 ```
 dependencies {
-    implementation 'com.parcelvoy.android:andorid-sdk:1.0'
+    implementation 'com.github.parcelvoy:android-sdk:0.1.0'
 }
 ```
 
