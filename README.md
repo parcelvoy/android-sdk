@@ -13,11 +13,11 @@ Installing the Parcelvoy Android SDK will provide you with user identification, 
 ### Version Information
 - The Parcelvoy Android SDK supports SDK 21+
 
-### Swift Package Manager
-Go to File -> Swift Packages -> Add Package Dependency and enter:
+### Install the SDK
+In your **build.gradle** add:
 ```
 dependencies {
-    implementation 'com.github.parcelvoy:android-sdk:0.1.0'
+    implementation 'com.github.parcelvoy:android-sdk:0.1.3'
 }
 ```
 
