@@ -17,7 +17,7 @@ Installing the Parcelvoy Android SDK will provide you with user identification, 
 In your **build.gradle** add:
 ```
 dependencies {
-    implementation 'com.github.parcelvoy:android-sdk:0.1.4'
+    implementation 'com.github.parcelvoy:android-sdk:0.1.5'
 }
 ```
 
