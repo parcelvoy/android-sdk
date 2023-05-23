@@ -55,7 +55,7 @@ class NetworkManager(
         useBaseUri: Boolean = true,
         handler: ((IOException?) -> Unit)? = null
     ) {
-        val url = if (useBaseUri) URL("${config.urlEndpoint}/client/$path") else URL(path)
+        val url = if (useBaseUri) URL("${config.urlEndpoint}/api/client/$path") else URL(path)
         val requestBody = gson.toJson(body).toRequestBody()
         val request = Request.Builder().url(url).post(requestBody)
             .addHeader("Content-Type", "application/json")
