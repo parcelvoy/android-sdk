@@ -27,7 +27,7 @@ class NetworkManager(
     private val httpLoggingInterceptor: HttpLoggingInterceptor
         get() {
             val interceptor = HttpLoggingInterceptor()
-            interceptor.level = if (BuildConfig.DEBUG) {
+            interceptor.level = if (config.isDebug) {
                 HttpLoggingInterceptor.Level.BODY
             } else {
                 HttpLoggingInterceptor.Level.NONE

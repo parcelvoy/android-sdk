@@ -5,7 +5,8 @@ import com.google.gson.annotations.SerializedName
 
 data class Config(
     val apiKey: String,
-    val urlEndpoint: String
+    val urlEndpoint: String,
+    val isDebug: Boolean = false
 )
 
 data class Identity(

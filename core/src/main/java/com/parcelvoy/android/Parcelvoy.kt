@@ -191,8 +191,9 @@ open class Parcelvoy protected constructor(
         fun initialize(
             context: Context,
             apiKey: String,
-            urlEndpoint: String
-        ): Parcelvoy = initialize(context, Config(apiKey, urlEndpoint))
+            urlEndpoint: String,
+            isDebug: Boolean = false
+        ): Parcelvoy = initialize(context, Config(apiKey, urlEndpoint, isDebug))
 
         /**
          * Initialize the library with a config
