@@ -6,6 +6,12 @@ import androidx.preference.PreferenceManager
 
 class Preferences(context: Context) {
 
+    var anonymousId: String?
+        get() = getString("PARCELVOY_ANONYMOUS_ID")
+        set(value) {
+            setString("PARCELVOY_ANONYMOUS_ID", value)
+        }
+
     var deviceUuid: String?
         get() = getString("PARCELVOY_DEVICE_UUID")
         set(value) {

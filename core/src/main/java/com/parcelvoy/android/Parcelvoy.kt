@@ -11,7 +11,6 @@ open class Parcelvoy protected constructor(
 ) {
 
     private var externalId: String? = null
-    private var anonymousId: String = UUID.randomUUID().toString()
     private var network: NetworkManager = NetworkManager(config)
     private val preferences: Preferences = Preferences(context)
 
@@ -36,7 +35,7 @@ open class Parcelvoy protected constructor(
     ) {
         identify(
             identity = Identity(
-                anonymousId = anonymousId,
+                anonymousId = getOrAndOrSetAnonymousId(),
                 externalId = id,
                 phone = phone,
                 email = email,
@@ -58,7 +57,7 @@ open class Parcelvoy protected constructor(
     fun identify(identity: Identity) {
         if (externalId == null) {
             identity.externalId?.let {
-                alias(anonymousId = anonymousId, externalId = it)
+                alias(anonymousId = getOrAndOrSetAnonymousId(), externalId = it)
             }
         }
 
@@ -88,6 +87,16 @@ open class Parcelvoy protected constructor(
     }
 
     /**
+     * Clears out the externalId and stored anonymousId
+     *
+     * It is suggested that you call this when a user logs out of your app
+     */
+    fun reset() {
+        this.externalId = null
+        preferences.anonymousId = null
+    }
+
+    /**
      * Track an event
      *
      * Send events for both anonymous and identified users to Parcelvoy to
@@ -101,7 +110,7 @@ open class Parcelvoy protected constructor(
             events = listOf(
                 Event(
                     name = event,
-                    anonymousId = anonymousId,
+                    anonymousId = getOrAndOrSetAnonymousId(),
                     externalId = externalId,
                     properties = properties
                 )
@@ -128,7 +137,7 @@ open class Parcelvoy protected constructor(
         }
 
         val device = Device(
-            anonymousId = anonymousId,
+            anonymousId = getOrAndOrSetAnonymousId(),
             externalId = externalId,
             token = token,
             deviceId = deviceId,
@@ -177,6 +186,11 @@ open class Parcelvoy protected constructor(
             }
         }
     }
+
+    private fun getOrAndOrSetAnonymousId(): String =
+        preferences.anonymousId ?: UUID.randomUUID().toString().apply {
+            preferences.anonymousId = this
+        }
 
     companion object {
 
