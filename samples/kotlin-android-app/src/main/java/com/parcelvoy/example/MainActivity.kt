@@ -10,8 +10,10 @@ import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.getSystemService
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
+import kotlinx.coroutines.launch
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,13 +29,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sample)
 
-        analytics.identify(
-            id = UUID.randomUUID().toString(),
-            traits = mapOf(
-                "first_name" to "John",
-                "last_name" to "Doe"
+        lifecycleScope.launch {
+            analytics.identify(
+                id = UUID.randomUUID().toString(),
+                email = "email@example.app",
+                traits = mapOf(
+                    "first_name" to "John",
+                    "last_name" to "Doe",
+                )
             )
-        )
+        }
+
+        lifecycleScope.launch {
+            analytics.getNotifications()
+        }
 
         analytics.track(
             event = "Application Opened",
@@ -80,10 +89,11 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    override fun onNewIntent(intent: Intent?) {
+    override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
 
-        val uri = intent?.data
+        val uri = intent.data
+        Log.e(LOG_TAG, "onNewIntent | uri: $uri")
         if (uri != null) {
             val redirect = analytics.getUriRedirect(uri)
             Log.e(LOG_TAG, "redirect: $redirect")

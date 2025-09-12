@@ -1,12 +1,18 @@
 package com.parcelvoy.android
 
 import android.os.Build
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+import org.json.JSONException
+import org.json.JSONObject
+import java.util.Date
 
 data class Config(
     val apiKey: String,
     val urlEndpoint: String,
-    val isDebug: Boolean = false
+    val inAppDelegate: InAppDelegate? = null,
+    val isDebug: Boolean = false,
 )
 
 data class Identity(
@@ -39,7 +45,8 @@ data class Device(
     val osVersion: String,
     val model: String,
     val appBuild: String,
-    val appVersion: String
+    val appVersion: String,
+    val sdkVersion: String,
 ) {
 
     constructor(
@@ -48,7 +55,7 @@ data class Device(
         token: String?,
         deviceId: String,
         appBuild: Int,
-        appVersion: String
+        appVersion: String,
     ) : this(
         anonymousId = anonymousId,
         externalId = externalId,
@@ -58,6 +65,103 @@ data class Device(
         osVersion = Build.VERSION.RELEASE,
         model = Build.MODEL,
         appBuild = appBuild.toString(),
-        appVersion = appVersion
+        appVersion = appVersion,
+        sdkVersion = "1.0.0",
     )
+}
+
+data class Page<T>(
+    val results: List<T>,
+    val nextCursor: String?
+)
+
+enum class NotificationType {
+    @SerializedName("banner")
+    BANNER,
+
+    @SerializedName("alert")
+    ALERT,
+
+    @SerializedName("html")
+    HTML
+}
+
+interface NotificationContent: Parcelable {
+    val title: String
+    val body: String
+    val readOnShow: Boolean?
+}
+
+@Parcelize
+data class BannerNotification(
+    override val title: String,
+    override val body: String,
+    override val readOnShow: Boolean? = null
+) : NotificationContent
+
+@Parcelize
+data class AlertNotification(
+    override val title: String,
+    override val body: String,
+    val image: String?,
+    override val readOnShow: Boolean? = null
+) : NotificationContent
+
+@Parcelize
+data class HtmlNotification(
+    override val title: String,
+    override val body: String,
+    val html: String,
+    override val readOnShow: Boolean? = null
+) : NotificationContent
+
+@Parcelize
+data class ParcelvoyNotification(
+    val id: Long,
+    val contentType: NotificationType,
+    val content: NotificationContent,
+    val readAt: Date?,
+    val expiresAt: Date?
+): Parcelable
+
+enum class InAppAction {
+    DISMISS,
+    CUSTOM
+}
+
+class ParcelvoyAction(
+    val config: JSONObject
+) {
+
+    var userInput: String? = null
+
+    val type: String?
+        get() = config.optString("type")
+
+    val data: String?
+        get() = config.optString("data")
+
+    fun isOfType(type: String): Boolean {
+        return this.type != null && this.type == type
+    }
+
+    companion object {
+        const val ACTION_TYPE_OPEN_URL: String = "openUrl"
+
+        fun from(config: JSONObject?): ParcelvoyAction? = config?.let { ParcelvoyAction(it) }
+
+        fun actionOpenUrl(url: String?): ParcelvoyAction? =
+            url?.let {
+                val config = JSONObject()
+                config.put("type", "openUrl")
+                config.put("data", url)
+                ParcelvoyAction(config)
+            }
+
+        fun actionCustomAction(customActionName: String): ParcelvoyAction? {
+            val config = JSONObject()
+            config.put("type", customActionName)
+            return ParcelvoyAction(config)
+        }
+    }
 }
