@@ -366,17 +366,15 @@ open class Parcelvoy protected constructor(
     }
 
     /**
-     * Handle push notification receipt.
+     * Handle push notification message refresh.
      *
-     * Push notifications may come with an internal redirect to execute when
-     * the notification is opened. This method opens a URL if one is provided
-     * and returns if there was a match or not.
+     * Push notifications may come with an internal command to
+     * check for in-app messages. This method should be called
+     * from your push notification handler to allow the library
+     * to process the command and show any in-app messages if needed.
      *
-     * @param context The Android Context.
-     * @param userInfo The data payload from the push notification.
-     * @return True if the notification was handled, false otherwise.
+     * @param bundle The payload from the push notification.
      */
-    //TODO
     fun pushReceived(bundle: Bundle) {
         // Handle silent notifications that should only trigger in-app messages
         if (isCheckMessagePush(bundle)) showLatestNotification()
