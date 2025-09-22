@@ -1,36 +1,45 @@
 {
   "project_info": {
-    "project_number": "697087175041",
-    "project_id": "caramel-caster-367919",
-    "storage_bucket": "caramel-caster-367919.appspot.com"
+    "project_number": "992073867412",
+    "project_id": "parcelvoy-eba02",
+    "storage_bucket": "parcelvoy-eba02.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:697087175041:android:265db286aa4c9fddace080",
+        "mobilesdk_app_id": "1:992073867412:android:5a95d8311368dcbb029481",
         "android_client_info": {
           "package_name": "com.parcelvoy.example"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "697087175041-nogsl2knu94u3ipsu1ho1mq7dcfac4jo.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBgKrUQ-cr8i5tR4OUaZQWuZ57ReOgocjM"
+          "current_key": "AIzaSyD3fVQA3_-gQHGM4xs0vgBw1BnPsPDliDc"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "697087175041-nogsl2knu94u3ipsu1ho1mq7dcfac4jo.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992073867412:android:45f3bde07aa19c6e029481",
+        "android_client_info": {
+          "package_name": "com.parcelvoy.example"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3fVQA3_-gQHGM4xs0vgBw1BnPsPDliDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
         }
       }
     }
