@@ -73,6 +73,7 @@ class InAppDialogFragment : DialogFragment() {
 
             view.evaluateJavascript(dismissScript, null)
             view.evaluateJavascript(triggerScript, null)
+            setThemeJs()
         }
 
         override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
@@ -156,6 +157,16 @@ class InAppDialogFragment : DialogFragment() {
             clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
         }
+    }
+
+    private fun setThemeJs() {
+        val useDarkMode = delegate?.useDarkMode == true
+        val function = if (useDarkMode) {
+            "document.documentElement.classList.add('darkMode');"
+        } else {
+            "document.documentElement.classList.remove('darkMode');"
+        }
+        webView?.evaluateJavascript("javascript: $function", null)
     }
 
     /**

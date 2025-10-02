@@ -28,6 +28,8 @@ class MainApplication : Application(), InAppDelegate {
 
     override val autoShow: Boolean = true
 
+    override val useDarkMode: Boolean = false
+
     override fun onNew(notification: ParcelvoyNotification): InAppDisplayState {
         Log.d(LOG_TAG, "onNew: $notification")
         return InAppDisplayState.SHOW
