@@ -11,6 +11,9 @@ interface InAppDelegate {
     val autoShow: Boolean
         get() = true
 
+    val useDarkMode: Boolean
+        get() = false
+
     fun onNew(notification: ParcelvoyNotification): InAppDisplayState {
         return InAppDisplayState.SHOW
     }
