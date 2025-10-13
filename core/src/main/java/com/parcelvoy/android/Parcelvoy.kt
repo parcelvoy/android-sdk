@@ -196,15 +196,7 @@ open class Parcelvoy protected constructor(
     }
 
     /**
-     * Handle deeplink navigation
-     *
-     * To allow for click tracking, all emails are click-wrapped in a Parcelvoy url
-     * that then needs to be unwrapped for navigation purposes. This method
-     * checks to see if a given URL is a Parcelvoy URL and if so, unwraps the url,
-     * triggers the unwrapped URL and calls the Parcelvoy API to register that the
-     * URL was executed.
-     *
-     * @param universalLink The URL that the app is trying to open
+     * Returns a page of notifications
      */
     suspend fun getNotifications(): Result<Page<ParcelvoyNotification>> =
         network.get<Page<ParcelvoyNotification>>(

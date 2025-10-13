@@ -74,6 +74,8 @@ class InAppDialogFragment : DialogFragment() {
             view.evaluateJavascript(dismissScript, null)
             view.evaluateJavascript(triggerScript, null)
             setThemeJs()
+
+            notification?.let { delegate?.onDialogDisplayed(it) }
         }
 
         override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {

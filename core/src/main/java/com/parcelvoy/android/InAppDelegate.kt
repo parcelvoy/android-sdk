@@ -23,4 +23,8 @@ interface InAppDelegate {
     fun onError(error: Throwable) {
         // Default empty implementation
     }
+
+    fun onDialogDisplayed(notification: ParcelvoyNotification) {
+        // Default empty implementation
+    }
 }
