@@ -1,7 +1,6 @@
 package com.parcelvoy.android
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -75,7 +74,7 @@ class InAppDialogFragment : DialogFragment() {
             view.evaluateJavascript(triggerScript, null)
             setThemeJs()
 
-            notification?.let { delegate?.onDialogDisplayed(it) }
+            notification?.let { delegate?.onNotificationShown(it) }
         }
 
         override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {

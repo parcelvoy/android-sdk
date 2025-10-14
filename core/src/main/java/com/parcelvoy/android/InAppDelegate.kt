@@ -24,7 +24,7 @@ interface InAppDelegate {
         // Default empty implementation
     }
 
-    fun onDialogDisplayed(notification: ParcelvoyNotification) {
+    fun onNotificationShown(notification: ParcelvoyNotification) {
         // Default empty implementation
     }
 }
