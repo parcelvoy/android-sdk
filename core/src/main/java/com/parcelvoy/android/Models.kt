@@ -86,17 +86,19 @@ enum class NotificationType {
     HTML
 }
 
-interface NotificationContent: Parcelable {
+interface NotificationContent : Parcelable {
     val title: String
     val body: String
     val readOnShow: Boolean?
+    val custom: Map<String, String>?
 }
 
 @Parcelize
 data class BannerNotification(
     override val title: String,
     override val body: String,
-    override val readOnShow: Boolean? = null
+    override val readOnShow: Boolean? = null,
+    override val custom: Map<String, String>? = null,
 ) : NotificationContent
 
 @Parcelize
@@ -104,7 +106,8 @@ data class AlertNotification(
     override val title: String,
     override val body: String,
     val image: String?,
-    override val readOnShow: Boolean? = null
+    override val readOnShow: Boolean? = null,
+    override val custom: Map<String, String>? = null,
 ) : NotificationContent
 
 @Parcelize
@@ -112,7 +115,8 @@ data class HtmlNotification(
     override val title: String,
     override val body: String,
     val html: String,
-    override val readOnShow: Boolean? = null
+    override val readOnShow: Boolean? = null,
+    override val custom: Map<String, String>? = null,
 ) : NotificationContent
 
 @Parcelize
@@ -122,11 +126,11 @@ data class ParcelvoyNotification(
     val content: NotificationContent,
     val readAt: Date?,
     val expiresAt: Date?
-): Parcelable
+) : Parcelable
 
 enum class InAppAction {
     DISMISS,
-    CUSTOM
+    CUSTOM,
 }
 
 class ParcelvoyAction(
