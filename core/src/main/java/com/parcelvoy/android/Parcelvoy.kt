@@ -256,6 +256,13 @@ open class Parcelvoy protected constructor(
             InAppDialogFragment.newInstance(
                 notification = notification,
                 delegate = object : InAppDelegate {
+
+                    override val autoShow: Boolean
+                        get() = inAppDelegate?.autoShow == true
+
+                    override val useDarkMode: Boolean
+                        get() = inAppDelegate?.useDarkMode == true
+
                     override fun handle(
                         action: InAppAction,
                         context: Map<String, Any>,

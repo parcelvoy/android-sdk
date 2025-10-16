@@ -29,11 +29,10 @@ class ParcelvoyNotificationDeserializer : JsonDeserializer<ParcelvoyNotification
         }
 
         val contentJson = jsonObject.getAsJsonObject("content")
-        val notificationContent: NotificationContent = when (contentType) {
-            NotificationType.BANNER -> context.deserialize(contentJson, BannerNotification::class.java)
-            NotificationType.ALERT -> context.deserialize(contentJson, AlertNotification::class.java)
-            NotificationType.HTML -> context.deserialize(contentJson, HtmlNotification::class.java)
-        }
+        val notificationContent: NotificationContent = context.deserialize(
+            contentJson,
+            NotificationContent::class.java
+        )
         return ParcelvoyNotification(
             id = jsonObject.get("id")?.asLong ?: 0L,
             contentType = contentType,
