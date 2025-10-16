@@ -2,7 +2,9 @@ package com.parcelvoy.android
 
 import android.os.Build
 import android.os.Parcelable
+import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
+import com.parcelvoy.android.network.NotificationContentDeserializer
 import kotlinx.parcelize.Parcelize
 import org.json.JSONException
 import org.json.JSONObject
@@ -86,11 +88,13 @@ enum class NotificationType {
     HTML
 }
 
+@JsonAdapter(NotificationContentDeserializer::class)
 interface NotificationContent : Parcelable {
     val title: String
     val body: String
     val readOnShow: Boolean?
-    val custom: Map<String, String>?
+    val custom: Map<String, Any>?
+    val context: Map<String, String>?
 }
 
 @Parcelize
@@ -99,6 +103,7 @@ data class BannerNotification(
     override val body: String,
     override val readOnShow: Boolean? = null,
     override val custom: Map<String, String>? = null,
+    override val context: Map<String, String>? = null,
 ) : NotificationContent
 
 @Parcelize
@@ -108,6 +113,7 @@ data class AlertNotification(
     val image: String?,
     override val readOnShow: Boolean? = null,
     override val custom: Map<String, String>? = null,
+    override val context: Map<String, String>? = null,
 ) : NotificationContent
 
 @Parcelize
@@ -117,6 +123,7 @@ data class HtmlNotification(
     val html: String,
     override val readOnShow: Boolean? = null,
     override val custom: Map<String, String>? = null,
+    override val context: Map<String, String>? = null
 ) : NotificationContent
 
 @Parcelize
