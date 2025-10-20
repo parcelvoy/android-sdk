@@ -112,12 +112,23 @@ class InAppDialogFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val rootView = inflater.inflate(R.layout.dialog_in_app_container, container, false)
+        val webViewContainer = rootView.findViewById<ViewGroup>(R.id.webview_container)
         webView = WebView(requireContext()).apply {
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             setBackgroundColor(Color.TRANSPARENT)
             addJavascriptInterface(WebAppInterface(), "ParcelvoyJSBridge")
         }
+
+        webViewContainer.addView(
+            webView,
+            ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+        )
         webView?.webViewClient = webViewClient
         when (val content = notification?.content) {
             is HtmlNotification -> {
@@ -130,7 +141,7 @@ class InAppDialogFragment : DialogFragment() {
                 dismissAllowingStateLoss()
             }
         }
-        return webView
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -155,7 +166,6 @@ class InAppDialogFragment : DialogFragment() {
         dialog?.window?.apply {
             val flagsToUpdate = FLAG_LAYOUT_IN_SCREEN or FLAG_LAYOUT_INSET_DECOR
             setFlags(flagsToUpdate, flagsToUpdate)
-            clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
             decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
         }
     }

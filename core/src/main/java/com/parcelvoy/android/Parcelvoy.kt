@@ -279,6 +279,10 @@ open class Parcelvoy protected constructor(
                     override fun onError(error: Throwable) {
                         inAppDelegate?.onError(error)
                     }
+
+                    override fun onNotificationShown(notification: ParcelvoyNotification) {
+                        inAppDelegate?.onNotificationShown(notification)
+                    }
                 }
             ).show(fragmentManager, InAppDialogFragment.DIALOG_TAG)
             Log.i(LOG_TAG, "Showing in-app notification dialog: ${notification.id}")
