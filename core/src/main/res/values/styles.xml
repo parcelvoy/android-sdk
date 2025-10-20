@@ -1,10 +1,11 @@
 <resources>
 
     <style name="FullScreenDialogTheme" parent="@android:style/Theme.Translucent.NoTitleBar">
-        <item name="android:backgroundDimEnabled">false</item>\
+        <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:backgroundDimAmount">0.6</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
