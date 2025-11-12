@@ -30,8 +30,14 @@ class NotificationContentDeserializer : JsonDeserializer<NotificationContent> {
             contextJsonObject = customJsonObject.remove(KEY_CONTEXT)?.asJsonObject
         }
 
+        if (contentJson.has(KEY_CUSTOM) && contentJson.get(KEY_CUSTOM).isJsonObject) {
+            val originalCustom = contentJson.getAsJsonObject(KEY_CUSTOM)
+            val flattenedCustom = originalCustom.flatten()
+            contentJson.add(KEY_CUSTOM, flattenedCustom)
+        }
+
         if (contextJsonObject != null) {
-            contentJson.add(KEY_CONTEXT, contextJsonObject)
+            contentJson.add(KEY_CONTEXT, contextJsonObject.flatten())
         }
 
         val concreteType: Class<out NotificationContent> = when {
@@ -42,4 +48,18 @@ class NotificationContentDeserializer : JsonDeserializer<NotificationContent> {
 
         return context.deserialize(contentJson, concreteType)
     }
+}
+
+// Extension function to flatten nested JSON objects
+private fun JsonObject.flatten(): JsonObject {
+    val flattenedCustom = JsonObject()
+
+    for ((key, value) in this.entrySet()) {
+        if (value.isJsonPrimitive) {
+            flattenedCustom.add(key, value)
+        } else {
+            flattenedCustom.addProperty(key, value.toString())
+        }
+    }
+    return flattenedCustom
 }
