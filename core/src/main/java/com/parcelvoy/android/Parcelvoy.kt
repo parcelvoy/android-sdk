@@ -113,6 +113,17 @@ open class Parcelvoy protected constructor(
     }
 
     /**
+     * Manually set the external identifier of the user
+     *
+     * This should be used if the app manages user identities outside of the identify/alias flow.
+     *
+     * @param id A string representing the external identifier of the user
+     */
+    fun setExternalId(id: String) {
+        externalId = id
+    }
+
+    /**
      * Alias an anonymous user to a known user
      *
      * Calling alias will only work once, repeated calls will do nothing.
