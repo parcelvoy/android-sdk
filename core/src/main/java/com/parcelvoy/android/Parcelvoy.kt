@@ -279,12 +279,12 @@ open class Parcelvoy protected constructor(
                         context: Map<String, Any>,
                         notification: ParcelvoyNotification
                     ) {
-                        when(action) {
-                            InAppAction.DISMISS -> libraryScope.launch {
+                        if (action == InAppAction.DISMISS) {
+                            libraryScope.launch {
                                 consume(notification)
                             }
-                            InAppAction.CUSTOM -> inAppDelegate?.handle(action, context, notification)
                         }
+                        inAppDelegate?.handle(action, context, notification)
                     }
 
                     override fun onError(error: Throwable) {
