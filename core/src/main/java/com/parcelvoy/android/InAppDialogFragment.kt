@@ -245,19 +245,6 @@ class InAppDialogFragment : DialogFragment() {
         dismissAllowingStateLoss()
     }
 
-    override fun onDismiss(dialog: android.content.DialogInterface) {
-        super.onDismiss(dialog)
-
-        val notification = notification
-        if (isAdded && notification != null) {
-            delegate?.handle(
-                action = InAppAction.DISMISS,
-                context = emptyMap(),
-                notification = notification
-            )
-        }
-    }
-
     override fun onDestroyView() {
         // Important to null out WebView to prevent leaks
         webView?.destroy() // Use destroy to release resources
