@@ -493,7 +493,7 @@ open class Parcelvoy protected constructor(
         fun initialize(app: Application, config: Config): Parcelvoy = Parcelvoy(app, config)
 
         fun isParcelvoyPush(extras: Bundle?): Boolean =
-            extras?.getBoolean(Constants.PARCELVOY_KEY) == true || extras?.getString(Constants.PARCELVOY_KEY).toBoolean()
+            extras?.getString(Constants.PARCELVOY_KEY)?.toBoolean() ?: (extras?.getBoolean(Constants.PARCELVOY_KEY) == true)
 
         fun isCheckMessagePush(extras: Bundle?): Boolean =
             isParcelvoyPush(extras) &&
