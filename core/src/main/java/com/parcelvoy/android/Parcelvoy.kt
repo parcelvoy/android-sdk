@@ -19,7 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.ref.WeakReference
-import java.util.*
+import java.util.UUID
 
 open class Parcelvoy protected constructor(
     app: Application,
@@ -211,7 +211,7 @@ open class Parcelvoy protected constructor(
      */
     suspend fun getNotifications(): Result<Page<ParcelvoyNotification>> =
         network.get<Page<ParcelvoyNotification>>(
-            path = "notifications" ,
+            path = "notifications",
             user = Alias(
                 anonymousId = getOrAndOrSetAnonymousId(),
                 externalId = externalId
@@ -497,7 +497,6 @@ open class Parcelvoy protected constructor(
 
         fun isCheckMessagePush(extras: Bundle?): Boolean =
             isParcelvoyPush(extras) &&
-                    extras?.getBoolean(Constants.IN_APP_CHECK_MESSAGE_KEY) == true ||
-                    extras?.getString(Constants.IN_APP_CHECK_MESSAGE_KEY).toBoolean()
+                extras?.getString(Constants.IN_APP_CHECK_MESSAGE_KEY)?.toBoolean() ?: (extras?.getBoolean(Constants.IN_APP_CHECK_MESSAGE_KEY) == true)
     }
 }
